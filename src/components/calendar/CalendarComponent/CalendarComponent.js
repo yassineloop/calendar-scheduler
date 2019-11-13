@@ -3,13 +3,17 @@ import * as dateFns from 'date-fns';
 import '../../../App.css';
 
 import CalendarHeader from './CalendarHeader';
+import CalendarWeekDays from './CalendarWeekDays';
 
 class CalendarComponent extends React.Component {
 
-  state = {
-    currentMonth: new Date(),
-    selectedDate: new Date()
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentMonth: new Date(),
+      selectedDate: new Date()
+    };
+  }
 
 
   renderCells() {
@@ -91,7 +95,10 @@ class CalendarComponent extends React.Component {
           prevMonth={this.prevMonth}
           nextMonth={this.nextMonth}
         />
-        {this.renderDays()}
+        <CalendarWeekDays
+          currentMonth={this.state.currentMonth}
+        />
+
         {this.renderCells()}
       </div>
     );
