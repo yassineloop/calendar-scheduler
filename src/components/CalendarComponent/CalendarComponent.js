@@ -1,6 +1,6 @@
 import React from "react";
 import * as dateFns from 'date-fns';
-import '../../../App.css';
+import './CalendarComponent.css';
 
 import CalendarHeader from './CalendarHeader';
 import CalendarWeekDays from './CalendarWeekDays';
@@ -15,9 +15,6 @@ class CalendarComponent extends React.Component {
       selectedDate: new Date()
     };
   }
-
-
-
 
   onDateClick = day => {
     this.setState({
