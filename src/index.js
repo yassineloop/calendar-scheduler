@@ -5,14 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware, compose } from "redux";
-import calendarReducer from './redux/reducers/calendarReducer';
-import thunk from "redux-thunk";
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const store = createStore(calendarReducer, composeEnhancers(applyMiddleware(thunk)));
-
+import { store } from './redux/store';
 
 ReactDOM.render(
   <Provider store={store}>

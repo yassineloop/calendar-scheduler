@@ -7,24 +7,23 @@ import {getCurrentMonthAction, selectDateAction} from "../../redux/actions/calen
 import CalendarHeader from './CalendarHeader';
 import CalendarWeekDays from './CalendarWeekDays';
 import CalendarCells from './CalendarCells';
-import {applyMiddleware as dispatch} from "redux";
 import connect from "react-redux/es/connect/connect";
 
 class CalendarComponent extends React.Component {
 
   onDateClick = day => {
     console.log(day);
-    dispatch(selectDateAction(day));
+    this.props.selectDate(day);
   };
 
   nextMonth = () => {
     let nextMonth = dateFns.addMonths(this.props.currentMonth, 1);
-    dispatch(getCurrentMonthAction(nextMonth));
+    this.props.getCurrentMonth(nextMonth);
   };
 
   prevMonth = () => {
     let prevMonth = dateFns.subMonths(this.props.currentMonth, 1);
-    dispatch(getCurrentMonthAction(prevMonth));
+    this.props.getCurrentMonth(prevMonth);
   };
 
   render() {
@@ -56,10 +55,10 @@ const mapStateToProps = state => {
   return { selectedDate, currentMonth };
 };
 
-const mapDispatchToProps = {
-  selectDateAction,
-  getCurrentMonthAction
-}
+const mapDispatchToProps = (dispatch) => ({
+  selectDate: (date) => dispatch(selectDateAction(date)),
+  getCurrentMonth: (date) => dispatch(getCurrentMonthAction(date)),
+});
 
 
 export default connect(
