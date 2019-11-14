@@ -2,53 +2,48 @@ import React from "react";
 import * as dateFns from 'date-fns';
 import './CalendarComponent.css';
 
+import {getCurrentMonthAction, selectDateAction} from "../../redux/actions/calendarActions";
+
 import CalendarHeader from './CalendarHeader';
 import CalendarWeekDays from './CalendarWeekDays';
 import CalendarCells from './CalendarCells';
+import {applyMiddleware as dispatch} from "redux";
+import connect from "react-redux/es/connect/connect";
 
 class CalendarComponent extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentMonth: new Date(),
-      selectedDate: new Date()
-    };
-  }
-
   onDateClick = day => {
-    this.setState({
-      selectedDate: day
-    }, ()=> console.log(this.state.selectedDate));
+    console.log(day);
+    dispatch(selectDateAction(day));
   };
 
   nextMonth = () => {
-    this.setState({
-      currentMonth: dateFns.addMonths(this.state.currentMonth, 1)
-    });
+    let nextMonth = dateFns.addMonths(this.props.currentMonth, 1);
+    dispatch(getCurrentMonthAction(nextMonth));
   };
 
   prevMonth = () => {
-    this.setState({
-      currentMonth: dateFns.subMonths(this.state.currentMonth, 1)
-    });
+    let prevMonth = dateFns.subMonths(this.props.currentMonth, 1);
+    dispatch(getCurrentMonthAction(prevMonth));
   };
 
   render() {
+    const { selectedDate, currentMonth } = this.props;
+
     return (
       <div className="calendar">
         <CalendarHeader
-          currentMonth={this.state.currentMonth}
+          currentMonth={currentMonth}
           prevMonth={this.prevMonth}
           nextMonth={this.nextMonth}
         />
         <CalendarWeekDays
-          currentMonth={this.state.currentMonth}
+          currentMonth={currentMonth}
         />
 
         <CalendarCells
-          currentMonth={this.state.currentMonth}
-          selectedDate={this.state.selectedDate}
+          currentMonth={currentMonth}
+          selectedDate={selectedDate}
           onDateClick={this.onDateClick}
         />
       </div>
@@ -56,4 +51,20 @@ class CalendarComponent extends React.Component {
   }
 }
 
-export default CalendarComponent;
+const mapStateToProps = state => {
+  const { selectedDate, currentMonth } = state;
+  return { selectedDate, currentMonth };
+};
+
+const mapDispatchToProps = {
+  selectDateAction,
+  getCurrentMonthAction
+}
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CalendarComponent);
+
+
