@@ -1,13 +1,20 @@
 import React from "react";
 import * as dateFns from 'date-fns';
 import './CalendarComponent.css';
-
-import {getCurrentMonthAction, selectDateAction} from "../../redux/actions/calendarActions";
+import connect from "react-redux/es/connect/connect";
+import { store } from '../../redux/store';
 
 import CalendarHeader from './CalendarHeader';
 import CalendarWeekDays from './CalendarWeekDays';
 import CalendarCells from './CalendarCells';
-import connect from "react-redux/es/connect/connect";
+import ReminderPopOver from "./ReminderPopOver";
+
+import {
+  getCurrentMonthAction,
+  openPopOverAction,
+  selectDateAction,
+  setAnchorElAction
+} from "../../redux/actions/calendarActions";
 
 class CalendarComponent extends React.Component {
 
@@ -15,6 +22,13 @@ class CalendarComponent extends React.Component {
     console.log(day);
     this.props.selectDate(day);
   };
+
+  onClickPopOver = event => {
+    this.props.openPopOver();
+    this.props.setAnchorEl(event.currentTarget);
+    console.log(store.getState());
+  }
+
 
   nextMonth = () => {
     let nextMonth = dateFns.addMonths(this.props.currentMonth, 1);
@@ -44,6 +58,11 @@ class CalendarComponent extends React.Component {
           currentMonth={currentMonth}
           selectedDate={selectedDate}
           onDateClick={this.onDateClick}
+          onClickPopOver={this.onClickPopOver}
+        />
+
+        <ReminderPopOver
+          openPopOver={store.getState().openedPopOver}
         />
       </div>
     );
@@ -58,6 +77,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => ({
   selectDate: (date) => dispatch(selectDateAction(date)),
   getCurrentMonth: (date) => dispatch(getCurrentMonthAction(date)),
+  openPopOver: () => dispatch(openPopOverAction()),
+  setAnchorEl: (e) => dispatch(setAnchorElAction(e))
 });
 
 
