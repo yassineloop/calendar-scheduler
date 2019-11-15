@@ -4,12 +4,13 @@ import './CalendarComponent.css';
 import connect from "react-redux/es/connect/connect";
 import { store } from '../../redux/store';
 
+import ReminderPopOverComponent from "../ReminderPopOverComponent/ReminderPopOverComponent";
 import CalendarHeader from './CalendarHeader';
 import CalendarWeekDays from './CalendarWeekDays';
 import CalendarCells from './CalendarCells';
-import ReminderPopOver from "./ReminderPopOver";
 
 import {
+  closePopOverAction,
   getCurrentMonthAction,
   openPopOverAction,
   selectDateAction,
@@ -61,8 +62,10 @@ class CalendarComponent extends React.Component {
           onClickPopOver={this.onClickPopOver}
         />
 
-        <ReminderPopOver
-          openPopOver={store.getState().openedPopOver}
+        <ReminderPopOverComponent
+          openPopOver={this.props.openedPopOver}
+          closePopOver={this.props.closePopOver}
+          anchorEl={this.props.anchorEl}
         />
       </div>
     );
@@ -70,14 +73,24 @@ class CalendarComponent extends React.Component {
 }
 
 const mapStateToProps = state => {
-  const { selectedDate, currentMonth } = state;
-  return { selectedDate, currentMonth };
+  const { selectedDate,
+    currentMonth,
+    openedPopOver,
+    anchorEl
+  } = state;
+
+  return { selectedDate,
+    currentMonth,
+    openedPopOver,
+    anchorEl
+  };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   selectDate: (date) => dispatch(selectDateAction(date)),
   getCurrentMonth: (date) => dispatch(getCurrentMonthAction(date)),
   openPopOver: () => dispatch(openPopOverAction()),
+  closePopOver: () => dispatch(closePopOverAction()),
   setAnchorEl: (e) => dispatch(setAnchorElAction(e))
 });
 
