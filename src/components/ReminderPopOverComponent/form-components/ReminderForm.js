@@ -3,6 +3,8 @@ import 'date-fns';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import DateFnsUtils from '@date-io/date-fns';
+import Button from '@material-ui/core/Button';
+
 
 
 import {
@@ -38,6 +40,10 @@ function ReminderForm() {
   const handleDateChange = date => {
     setSelectedDate(date);
   };
+
+  const submitReminder = () => {
+
+  }
 
 
   return (
@@ -79,6 +85,15 @@ function ReminderForm() {
             />
           </MuiPickersUtilsProvider>
         </div>
+      <div className="row">
+        <Button
+          color="primary"
+          className={classes.button}
+          onClick={submitReminder}
+        >
+          Primary
+        </Button>
+      </div>
     </form>
   );
 }

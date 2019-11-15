@@ -8,7 +8,7 @@ import ReminderForm from "./form-components/ReminderForm";
 
 const styles =  ({
   typography: {
-    padding: "20px",
+    padding: "10px",
   },
 });
 
@@ -46,7 +46,7 @@ class ReminderPopOverComponent extends React.Component {
           }}
         >
           <Typography className={classes.typography}>
-            Reminder
+            Add Reminder
           </Typography>
           <ReminderForm className={classes.typography}/>
         </Popover>
