@@ -24,7 +24,7 @@ class ReminderPopOverComponent extends React.Component {
   }
 
   render() {
-    const { classes, openPopOver } = this.props;
+    const { classes, openPopOver, anchorEl } = this.props;
     const id = openPopOver ? 'simple-popover' : undefined;
 
     return (
@@ -32,7 +32,7 @@ class ReminderPopOverComponent extends React.Component {
         <Popover
           id={id}
           open={openPopOver}
-          anchorEl={store.getState().anchorEl}
+          anchorEl={anchorEl}
           onClose={this.handleClose}
           anchorOrigin={{
             vertical: 'center',

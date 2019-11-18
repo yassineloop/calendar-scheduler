@@ -25,8 +25,8 @@ class CalendarComponent extends React.Component {
   };
 
   onClickPopOver = event => {
-    this.props.openPopOver();
     this.props.setAnchorEl(event.currentTarget);
+    this.props.openPopOver();
     console.log(store.getState());
   }
 
@@ -43,6 +43,7 @@ class CalendarComponent extends React.Component {
 
   render() {
     const { selectedDate, currentMonth } = this.props;
+    console.log(this.props);
 
     return (
       <div className="calendar">
@@ -72,17 +73,21 @@ class CalendarComponent extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { selectedDate,
-    currentMonth,
-    openedPopOver,
-    anchorEl
-  } = state;
 
-  return { selectedDate,
+
+const mapStateToProps = state => {
+  const {
+    selectedDate,
     currentMonth,
     openedPopOver,
     anchorEl
+  } = state.calendar;
+
+  return {
+    selectedDate: selectedDate,
+    currentMonth: currentMonth,
+    openedPopOver: openedPopOver,
+    anchorEl: anchorEl
   };
 };
 

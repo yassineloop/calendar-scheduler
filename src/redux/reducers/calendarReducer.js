@@ -1,4 +1,3 @@
-import * as dateFns from "date-fns";
 
 import {
   GET_CURRENT_MONTH,
@@ -9,11 +8,12 @@ import {
 } from "../actions/actionTypes";
 
 let initialState = {
-  selectedDate: dateFns.format(new Date(), 'yyyy-MM-dd'),
-  currentMonth: dateFns.format(new Date(), 'yyyy-MM-dd'),
+  selectedDate: new Date(),
+  currentMonth: new Date(),
   openedPopOver: false,
   anchorEl: null
 };
+
 
 const calendarReducer = (state = initialState, action) => {
   switch (action.type) {
