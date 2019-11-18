@@ -1,3 +1,5 @@
+import * as dateFns from "date-fns";
+
 import {
   GET_CURRENT_MONTH,
   OPEN_POP_OVER,
@@ -7,8 +9,8 @@ import {
 } from "../actions/actionTypes";
 
 let initialState = {
-  selectedDate: new Date(),
-  currentMonth: new Date(),
+  selectedDate: dateFns.format(new Date(), 'yyyy-MM-dd'),
+  currentMonth: dateFns.format(new Date(), 'yyyy-MM-dd'),
   openedPopOver: false,
   anchorEl: null
 };
@@ -25,8 +27,6 @@ const calendarReducer = (state = initialState, action) => {
       return Object.assign({}, state, { openedPopOver: action.payload });
     case SET_ANCHOR_EL:
       return Object.assign({}, state, { anchorEl: action.payload });
-
-
     default:
       return state;
   }

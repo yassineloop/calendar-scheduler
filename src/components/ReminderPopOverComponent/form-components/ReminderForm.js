@@ -5,8 +5,6 @@ import TextField from '@material-ui/core/TextField';
 import DateFnsUtils from '@date-io/date-fns';
 import Button from '@material-ui/core/Button';
 
-
-
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
@@ -16,33 +14,49 @@ import {
 const useStyles = makeStyles(theme => ({
   container: {
     padding: "10px",
-    display: 'flex',
-    flexWrap: 'wrap',
   },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 200,
+    width: 400,
   },
   datePickers: {
-    padding: "10px",
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 200,
+    marginTop: theme.spacing(2),
+    width: 150,
+  },
+  button: {
+    marginTop: theme.spacing(2)
   }
+
 }));
 
 function ReminderForm() {
   const classes = useStyles();
 
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [reminder, setReminderText] = React.useState();
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const [selectedTime, setSelectedTime] = React.useState(new Date());
+
+  const handleTextChange = text => {
+    setReminderText(text);
+    console.log(this.state);
+  }
 
   const handleDateChange = date => {
     setSelectedDate(date);
+    console.log(this.state);
   };
 
-  const submitReminder = () => {
+  const handleTimeChange = time => {
+    setSelectedTime(time);
+    console.log(this.state);
+  }
 
+  const submitReminder = () => {
+    console.log(this.state);
+    console.log(reminder);
   }
 
 
@@ -52,18 +66,18 @@ function ReminderForm() {
         <TextField
           id="standard-basic"
           className={classes.textField}
-          label="Standard"
           margin="normal"
+          onChange={handleTextChange}
         />
       </div>
       <div className="row">
-        <div className="col-md-6"></div>
-          <MuiPickersUtilsProvider className={classes.datePickers} utils={DateFnsUtils}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <div className="col-md-6">
             <KeyboardDatePicker
+              className={classes.datePickers}
               disableToolbar
               variant="inline"
               format="MM/dd/yyyy"
-              margin="normal"
               id="date-picker-inline"
               label="Date picker inline"
               value={selectedDate}
@@ -72,26 +86,29 @@ function ReminderForm() {
                 'aria-label': 'change date',
               }}
             />
-            <br/>
-            <KeyboardTimePicker
-              margin="normal"
+          </div>
+          <br/>
+          <div className="col-md-6">
+          <KeyboardTimePicker
+              className={classes.datePickers}
               id="time-picker"
               label="Time picker"
-              value={selectedDate}
-              onChange={handleDateChange}
+              value={selectedTime}
+              onChange={handleTimeChange}
               KeyboardButtonProps={{
                 'aria-label': 'change time',
               }}
             />
-          </MuiPickersUtilsProvider>
-        </div>
+          </div>
+        </MuiPickersUtilsProvider>
+      </div>
       <div className="row">
         <Button
           color="primary"
           className={classes.button}
           onClick={submitReminder}
         >
-          Primary
+          Add
         </Button>
       </div>
     </form>

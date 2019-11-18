@@ -5,3 +5,5 @@ export const OPEN_POP_OVER = "OPEN_POP_OVER";
 export const CLOSE_POP_OVER = "CLOSE_POP_OVER";
 
 export const SET_ANCHOR_EL = "SET_ANCHOR_EL";
+
+export const ADD_REMINDER = "ADD_REMINDER";

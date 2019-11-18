@@ -1,5 +1,7 @@
-import calendarReducer from './reducers/calendarReducer';
+import rootReducer from './reducers/rootReducer';
+//import calendarReducer from './reducers/calendarReducer';
+
 
 import { createStore } from "redux";
-export const store = createStore(calendarReducer);
+export const store = createStore(rootReducer);
 

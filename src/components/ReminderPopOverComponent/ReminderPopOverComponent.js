@@ -13,7 +13,6 @@ const styles =  ({
 });
 
 
-
 class ReminderPopOverComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +22,6 @@ class ReminderPopOverComponent extends React.Component {
   handleClose= () => {
     this.props.closePopOver();
   }
-
 
   render() {
     const { classes, openPopOver } = this.props;

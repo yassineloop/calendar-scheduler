@@ -11,7 +11,7 @@ const CalendarHeader = (props) => {
         </div>
       </div>
       <div className="col col-center">
-        <span>{dateFns.format(props.currentMonth, dateFormat)}</span>
+        <span>{props.currentMonth ? dateFns.format(props.currentMonth, dateFormat) : null}</span>
       </div>
       <div className="col col-end" onClick={props.nextMonth}>
         <div className="icon">chevron_right</div>
