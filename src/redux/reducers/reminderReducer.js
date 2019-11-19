@@ -3,14 +3,13 @@ import {
 } from "../actions/actionTypes";
 
 let initialState = {
-  newReminder: null,
-  reminders: {}
+  reminders: []
 };
 
 const reminderReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_REMINDER:
-      return Object.assign({}, state, { newReminder: action.payload });
+      return Object.assign({}, state, { reminders: [...state.reminders, action.payload] });
     default:
       return state;
   }

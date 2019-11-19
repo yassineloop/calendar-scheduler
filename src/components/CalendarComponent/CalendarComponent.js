@@ -20,14 +20,12 @@ import {
 class CalendarComponent extends React.Component {
 
   onDateClick = day => {
-    console.log(day);
     this.props.selectDate(day);
   };
 
   onClickPopOver = event => {
     this.props.setAnchorEl(event.currentTarget);
     this.props.openPopOver();
-    console.log(store.getState());
   }
 
 
@@ -42,8 +40,8 @@ class CalendarComponent extends React.Component {
   };
 
   render() {
-    const { selectedDate, currentMonth } = this.props;
-    console.log(this.props);
+    const { selectedDate, currentMonth, reminders } = this.props;
+    console.log(reminders);
 
     return (
       <div className="calendar">
@@ -68,6 +66,7 @@ class CalendarComponent extends React.Component {
           closePopOver={this.props.closePopOver}
           anchorEl={this.props.anchorEl}
         />
+        
       </div>
     );
   }
@@ -83,11 +82,16 @@ const mapStateToProps = state => {
     anchorEl
   } = state.calendar;
 
+  const {
+    reminders
+  } = state.reminder;
+
   return {
     selectedDate: selectedDate,
     currentMonth: currentMonth,
     openedPopOver: openedPopOver,
-    anchorEl: anchorEl
+    anchorEl: anchorEl,
+    reminders: reminders
   };
 };
 

@@ -4,12 +4,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import DateFnsUtils from '@date-io/date-fns';
 import Button from '@material-ui/core/Button';
+import { store } from '../../../redux/store';
 
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
+  KeyboardTimePicker
 } from '@material-ui/pickers';
+import FormControl from "@material-ui/core/FormControl";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -32,85 +33,74 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-function ReminderForm() {
+const ReminderForm = (props) => {
   const classes = useStyles();
 
-  const [reminder, setReminderText] = React.useState();
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const [reminderText, setReminderText] = React.useState("");
   const [selectedTime, setSelectedTime] = React.useState(new Date());
 
-  const handleTextChange = text => {
+  const handleTextChange = event => {
+    let text = event.target.value;
     setReminderText(text);
-    console.log(this.state);
   }
 
-  const handleDateChange = date => {
-    setSelectedDate(date);
-    console.log(this.state);
-  };
-
-  const handleTimeChange = time => {
-    setSelectedTime(time);
-    console.log(this.state);
+  const handleTimeChange = date => {
+    setSelectedTime(date);
   }
 
-  const submitReminder = () => {
-    console.log(this.state);
+  const submitReminder = (e) => {
+    e.preventDefault();
+
+    let reminder = {
+      date: props.selectedDate,
+      text: reminderText,
+      time: selectedTime
+    };
+
+    props.addReminder(reminder);
+    props.closePopOver();
     console.log(reminder);
   }
 
-
   return (
-    <form className={classes.container} noValidate autoComplete="off">
-      <div className="row">
-        <TextField
-          id="standard-basic"
-          className={classes.textField}
-          margin="normal"
-          onChange={handleTextChange}
-        />
-      </div>
-      <div className="row">
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <div className="col-md-6">
-            <KeyboardDatePicker
-              className={classes.datePickers}
-              disableToolbar
-              variant="inline"
-              format="MM/dd/yyyy"
-              id="date-picker-inline"
-              label="Date picker inline"
-              value={selectedDate}
-              onChange={handleDateChange}
-              KeyboardButtonProps={{
-                'aria-label': 'change date',
-              }}
-            />
-          </div>
-          <br/>
-          <div className="col-md-6">
-          <KeyboardTimePicker
-              className={classes.datePickers}
-              id="time-picker"
-              label="Time picker"
-              value={selectedTime}
-              onChange={handleTimeChange}
-              KeyboardButtonProps={{
-                'aria-label': 'change time',
-              }}
-            />
-          </div>
-        </MuiPickersUtilsProvider>
-      </div>
-      <div className="row">
-        <Button
-          color="primary"
-          className={classes.button}
-          onClick={submitReminder}
-        >
-          Add
-        </Button>
-      </div>
+    <form onSubmit={submitReminder} className={classes.container} noValidate autoComplete="off">
+      <FormControl required={true}>
+        <div className="row">
+          <TextField
+            required
+            type="text"
+            id="standard-basic"
+            className={classes.textField}
+            margin="normal"
+            onChange={handleTextChange}
+          />
+        </div>
+        <div className="row">
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <div className="col-md-6">
+            <KeyboardTimePicker
+                className={classes.datePickers}
+                id="time-picker"
+                label="Time picker"
+                value={selectedTime}
+                onChange={handleTimeChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change time',
+                }}
+              />
+            </div>
+          </MuiPickersUtilsProvider>
+        </div>
+        <div className="row">
+          <Button
+            type="submit"
+            color="primary"
+            className={classes.button}
+          >
+            Add
+          </Button>
+        </div>
+      </FormControl>
     </form>
   );
 }
