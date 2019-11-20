@@ -1,7 +1,6 @@
 import React from 'react';
 import * as dateFns from "date-fns";
 
-
 const CalendarWeekDays = (props) => {
   const dateFormat = "EEEE";
   const days = [];

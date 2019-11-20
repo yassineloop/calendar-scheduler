@@ -2,7 +2,11 @@ import React from "react";
 import * as dateFns from "date-fns";
 
 const CalendarCells = (props) => {
-  const { currentMonth, selectedDate, onDateClick } = props;
+  const { currentMonth,
+    selectedDate,
+    onDateClick,
+    onClickPopOver
+  } = props;
 
   //taking month's boundaries
   const monthStart = dateFns.startOfMonth(currentMonth);
@@ -32,7 +36,10 @@ const CalendarCells = (props) => {
             !dateFns.isSameMonth(day, monthStart) ? "disabled" : (dateFns.isSameDay(day, selectedDate) ? "selected" : "") }`
           }
           key={day}
-          onClick={() => onDateClick(dateFns.toDate(cloneDay))}
+          onClick={(e) => {
+            onDateClick(dateFns.toDate(cloneDay));
+            onClickPopOver(e);
+          }}
         >
           <span className="number">{formattedDate}</span>
           <span className="bg">{formattedDate}</span>
