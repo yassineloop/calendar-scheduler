@@ -9,7 +9,3 @@ export function addReminderAction(reminder) {
     payload: reminder
   }
 }
-
-export function checkDate(reminder) {
-  console.log(reminder.date);
-}

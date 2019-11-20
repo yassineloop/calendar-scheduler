@@ -11,6 +11,7 @@ import {
   KeyboardTimePicker
 } from '@material-ui/pickers';
 import FormControl from "@material-ui/core/FormControl";
+import {getPrettyTime} from "../../../utils/date-functions";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -46,6 +47,8 @@ const ReminderForm = (props) => {
 
   const handleTimeChange = date => {
     setSelectedTime(date);
+    console.log(date);
+    getPrettyTime(date);
   }
 
   const submitReminder = (e) => {
