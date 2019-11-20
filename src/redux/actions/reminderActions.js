@@ -3,7 +3,6 @@ import {
 } from "./actionTypes";
 
 export function addReminderAction(reminder) {
-  console.log(reminder);
   return {
     type: ADD_REMINDER,
     payload: reminder
