@@ -1,11 +1,34 @@
 import React from "react";
 import * as dateFns from "date-fns";
+import { makeStyles } from '@material-ui/core/styles';
+import { blue, red } from '@material-ui/core/colors';
+import {checkIfHasRemindersByDate, getRemindersOfDate} from "../../utils/date-functions";
+import NotificationsOutlinedIcon from '@material-ui/icons/NotificationsOutlined';
+import IconButton from "@material-ui/core/IconButton";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    '& > svg': {
+      margin: theme.spacing(2),
+    },
+  },
+  iconHover: {
+    '&:hover': {
+      color: red[800],
+    },
+  },
+}));
 
 const CalendarCells = (props) => {
+
+  const classes = useStyles();
+
   const { currentMonth,
     selectedDate,
     onDateClick,
-    onClickPopOver
+    onClickPopOver,
+    onClickReminderList,
+    reminders
   } = props;
 
   //taking month's boundaries
@@ -41,6 +64,22 @@ const CalendarCells = (props) => {
             onClickPopOver(e);
           }}
         >
+
+          {(getRemindersOfDate(reminders, day).length > 0) ? (
+
+            <IconButton
+                onClick={(e) => onClickReminderList(e)}>
+              <NotificationsOutlinedIcon
+                className={classes.iconHover}
+                color="error"
+                style={{ fontSize: 30, zIndex: 10, position: "relative" }}
+
+              />
+            </IconButton>
+
+            ) : null
+          }
+
           <span className="number">{formattedDate}</span>
           <span className="bg">{formattedDate}</span>
         </div>

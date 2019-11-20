@@ -3,7 +3,7 @@ import {
   OPEN_POP_OVER,
   CLOSE_POP_OVER,
   SET_ANCHOR_EL,
-  SELECT_DATE
+  SELECT_DATE, OPEN_REMINDER_LIST, CLOSE_REMINDER_LIST
 } from "./actionTypes";
 
 
@@ -34,6 +34,21 @@ export function closePopOverAction() {
     payload: false
   }
 }
+
+export function openReminderListAction() {
+  return {
+    type: OPEN_REMINDER_LIST,
+    payload: true
+  }
+}
+
+export function closeReminderListAction() {
+  return {
+    type: CLOSE_REMINDER_LIST,
+    payload: false
+  }
+}
+
 
 export function setAnchorElAction(el) {
   return {

@@ -4,13 +4,14 @@ import {
   OPEN_POP_OVER,
   CLOSE_POP_OVER,
   SELECT_DATE,
-  SET_ANCHOR_EL
+  SET_ANCHOR_EL, OPEN_REMINDER_LIST, CLOSE_REMINDER_LIST
 } from "../actions/actionTypes";
 
 let initialState = {
   selectedDate: new Date(),
   currentMonth: new Date(),
   openedPopOver: false,
+  openedReminderList: false,
   anchorEl: null
 };
 
@@ -25,6 +26,10 @@ const calendarReducer = (state = initialState, action) => {
       return Object.assign({}, state, { openedPopOver: action.payload });
     case CLOSE_POP_OVER:
       return Object.assign({}, state, { openedPopOver: action.payload });
+    case OPEN_REMINDER_LIST:
+      return Object.assign({}, state, { openedReminderList: action.payload });
+    case CLOSE_REMINDER_LIST:
+      return Object.assign({}, state, { openedReminderList: action.payload });
     case SET_ANCHOR_EL:
       return Object.assign({}, state, { anchorEl: action.payload });
     default:

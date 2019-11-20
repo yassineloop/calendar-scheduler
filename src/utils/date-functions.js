@@ -1,6 +1,31 @@
-export function getPrettyTime(date) {
-  let hours = date.getHours();
-  let mins = date.getMinutes();
+import * as dateFns from 'date-fns';
+import {LongTimeFormat} from "./date-formats";
+import _ from 'lodash';
 
-  console.log(hours, mins);
+export function getPrettyTime(date) {
+  let formattedTime = dateFns.format(date, LongTimeFormat);
+  return formattedTime;
+}
+
+
+
+export function getRightTimeDate(selectedDate, time) {
+  let day = selectedDate.getDate();
+  let month = selectedDate.getMonth();
+  let year = selectedDate.getYear();
+
+  let h = time.getHours();
+  let m = time.getMinutes();
+
+  let date = new Date(year, month, day, h, m);
+
+  return date;
+
+}
+
+
+
+export function getRemindersOfDate(reminders, selectedDate) {
+  let filteredReminders = _.filter(reminders, {selectedDate: selectedDate});
+  return filteredReminders;
 }

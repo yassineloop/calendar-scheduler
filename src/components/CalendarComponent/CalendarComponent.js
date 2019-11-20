@@ -10,12 +10,14 @@ import CalendarWeekDays from './CalendarWeekDays';
 import CalendarCells from './CalendarCells';
 
 import {
-  closePopOverAction,
+  closePopOverAction, closeReminderListAction,
   getCurrentMonthAction,
-  openPopOverAction,
+  openPopOverAction, openReminderListAction,
   selectDateAction,
   setAnchorElAction
 } from "../../redux/actions/calendarActions";
+import ReminderList from "../ReminderListComponent/reminder-list/ReminderList";
+import ReminderListComponent from "../ReminderListComponent";
 
 class CalendarComponent extends React.Component {
 
@@ -26,6 +28,13 @@ class CalendarComponent extends React.Component {
   onClickPopOver = event => {
     this.props.setAnchorEl(event.currentTarget);
     this.props.openPopOver();
+  }
+
+  onClickReminderList = event => {
+    console.log("REM");
+    this.props.setAnchorEl(event.currentTarget);
+    this.props.closePopOver();
+    this.props.openReminderList();
   }
 
 
@@ -57,8 +66,10 @@ class CalendarComponent extends React.Component {
         <CalendarCells
           currentMonth={currentMonth}
           selectedDate={selectedDate}
+          reminders={reminders}
           onDateClick={this.onDateClick}
           onClickPopOver={this.onClickPopOver}
+          onClickReminderList={this.onClickReminderList}
         />
 
         <ReminderPopOverComponent
@@ -66,6 +77,13 @@ class CalendarComponent extends React.Component {
           closePopOver={this.props.closePopOver}
           anchorEl={this.props.anchorEl}
         />
+
+        <ReminderListComponent
+          openReminderList={this.props.openedReminderList}
+          closePopOver={this.props.closeReminderList}
+          anchorEl={this.props.anchorEl}
+        />
+
         
       </div>
     );
@@ -79,6 +97,7 @@ const mapStateToProps = state => {
     selectedDate,
     currentMonth,
     openedPopOver,
+    openedReminderList,
     anchorEl
   } = state.calendar;
 
@@ -90,6 +109,7 @@ const mapStateToProps = state => {
     selectedDate: selectedDate,
     currentMonth: currentMonth,
     openedPopOver: openedPopOver,
+    openedReminderList: openedReminderList,
     anchorEl: anchorEl,
     reminders: reminders
   };
@@ -100,6 +120,8 @@ const mapDispatchToProps = (dispatch) => ({
   getCurrentMonth: (date) => dispatch(getCurrentMonthAction(date)),
   openPopOver: () => dispatch(openPopOverAction()),
   closePopOver: () => dispatch(closePopOverAction()),
+  openReminderList: () => dispatch(openReminderListAction()),
+  closeReminderList: () => dispatch(closeReminderListAction()),
   setAnchorEl: (e) => dispatch(setAnchorElAction(e))
 });
 
