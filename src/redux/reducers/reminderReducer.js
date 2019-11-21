@@ -7,7 +7,6 @@ let initialState = {
 };
 
 const reminderReducer = (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case ADD_REMINDER:
       return Object.assign({}, state, { reminders: [...state.reminders, action.payload] });

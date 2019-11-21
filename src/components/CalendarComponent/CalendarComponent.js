@@ -24,17 +24,16 @@ class CalendarComponent extends React.Component {
   };
 
   onClickPopOver = event => {
-    if(!this.props.openedReminderList) {
-      this.props.setAnchorEl(event.currentTarget);
-      this.props.openPopOver();
-    }
+    this.props.setAnchorEl(event.currentTarget);
+    this.props.openPopOver();
   }
 
   onClickReminderList = event => {
-    console.log("RING");
+    event.stopPropagation();
     this.props.setAnchorEl(event.currentTarget);
     this.props.openReminderList();
     this.props.closePopOver();
+    return false;
   }
 
 

@@ -71,13 +71,16 @@ const CalendarCells = (props) => {
           {
             (getRemindersOfDate(reminders, day).length > 0) ? (
 
-              <IconButton onClick={(e) => onClickReminderList(e)}>
+              <IconButton onClick={(e) => {
+                  onDateClick(dateFns.toDate(cloneDay));
+                  onClickReminderList(e);
+                }}
+              >
                 <NotificationsOutlinedIcon
                   className={classes.iconHover}
                   color="error"
                 />
               </IconButton>
-
             ) : null
           }
 
