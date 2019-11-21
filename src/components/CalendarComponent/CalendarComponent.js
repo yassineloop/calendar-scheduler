@@ -2,8 +2,6 @@ import React from "react";
 import * as dateFns from 'date-fns';
 import './CalendarComponent.css';
 import connect from "react-redux/es/connect/connect";
-import { store } from '../../redux/store';
-
 import ReminderPopOverComponent from "../ReminderPopOverComponent/ReminderPopOverComponent";
 import CalendarHeader from './CalendarHeader';
 import CalendarWeekDays from './CalendarWeekDays';
@@ -16,7 +14,7 @@ import {
   selectDateAction,
   setAnchorElAction
 } from "../../redux/actions/calendarActions";
-import ReminderList from "../ReminderListComponent/reminder-list/ReminderList";
+
 import ReminderListComponent from "../ReminderListComponent";
 
 class CalendarComponent extends React.Component {
@@ -26,15 +24,17 @@ class CalendarComponent extends React.Component {
   };
 
   onClickPopOver = event => {
-    this.props.setAnchorEl(event.currentTarget);
-    this.props.openPopOver();
+    if(!this.props.openedReminderList) {
+      this.props.setAnchorEl(event.currentTarget);
+      this.props.openPopOver();
+    }
   }
 
   onClickReminderList = event => {
-    console.log("REM");
+    console.log("RING");
     this.props.setAnchorEl(event.currentTarget);
-    this.props.closePopOver();
     this.props.openReminderList();
+    this.props.closePopOver();
   }
 
 
@@ -50,7 +50,6 @@ class CalendarComponent extends React.Component {
 
   render() {
     const { selectedDate, currentMonth, reminders } = this.props;
-    console.log(reminders);
 
     return (
       <div className="calendar">
@@ -80,7 +79,8 @@ class CalendarComponent extends React.Component {
 
         <ReminderListComponent
           openReminderList={this.props.openedReminderList}
-          closePopOver={this.props.closeReminderList}
+          closeReminderList={this.props.closeReminderList}
+          closePopOver={this.props.closePopOver}
           anchorEl={this.props.anchorEl}
         />
 

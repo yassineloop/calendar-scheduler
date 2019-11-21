@@ -5,8 +5,14 @@ import { withStyles } from '@material-ui/styles';
 import Typography from "@material-ui/core/Typography";
 import * as dateFns from "date-fns";
 import {MonthDayYearFormat} from "../../utils/date-formats";
-import {closePopOverAction, closeReminderListAction, selectDateAction} from "../../redux/actions/calendarActions";
-import {addReminderAction} from "../../redux/actions/reminderActions";
+import {
+  closePopOverAction,
+  closeReminderListAction,
+  selectDateAction
+} from "../../redux/actions/calendarActions";
+
+import {addReminderAction, deleteReminderAction, editReminderAction} from "../../redux/actions/reminderActions";
+
 import PropTypes from "prop-types";
 import connect from "react-redux/es/connect/connect";
 import ReminderList from "./reminder-list/ReminderList";
@@ -25,6 +31,10 @@ class ReminderListComponent extends Component {
     this.handleClose = this.handleClose.bind(this);
   }
 
+  componentDidMount() {
+    this.props.closePopOver();
+  }
+
   handleClose= () => {
     this.props.closeReminderList();
   }
@@ -34,9 +44,15 @@ class ReminderListComponent extends Component {
       openedReminderList,
       anchorEl,
       selectedDate,
+      reminders,
+      editReminder,
+      deleteReminder,
+      closeReminderList
+
     } = this.props;
 
     const id = openedReminderList ? 'simple-popover' : undefined;
+
 
     return (
       <div>
@@ -55,11 +71,16 @@ class ReminderListComponent extends Component {
           }}
         >
           <Typography className={classes.typography}>
-            Add Reminder for
+            Reminders for:
             <br/><b>{dateFns.format(selectedDate, MonthDayYearFormat)}</b>
           </Typography>
 
-          <ReminderList/>
+          <ReminderList
+            reminders={reminders}
+            editReminder={editReminder}
+            deleteReminder={deleteReminder}
+            closeReminderList={closeReminderList}
+          />
 
         </Popover>
       </div>
@@ -74,7 +95,12 @@ const mapStateToProps = state => {
     currentMonth,
     openedReminderList,
     anchorEl,
+    openedPopOver
   } = state.calendar;
+
+  const {
+    reminders
+  } = state.reminder;
 
 
 
@@ -82,14 +108,19 @@ const mapStateToProps = state => {
     selectedDate: selectedDate,
     currentMonth: currentMonth,
     openedReminderList: openedReminderList,
+    openedPopOver: openedPopOver,
     anchorEl: anchorEl,
+    reminders: reminders
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   selectDate: (date) => dispatch(selectDateAction(date)),
   closeReminderList: () => dispatch(closeReminderListAction()),
-  addReminder: (reminder) => dispatch(addReminderAction(reminder))
+  addReminder: (reminder) => dispatch(addReminderAction(reminder)),
+  editReminder: (reminder) => dispatch(editReminderAction(reminder)),
+  deleteReminder: (reminder) => dispatch(deleteReminderAction(reminder)),
+  closePopOver: () => dispatch(closePopOverAction())
 });
 
 

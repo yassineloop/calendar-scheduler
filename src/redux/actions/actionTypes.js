@@ -10,4 +10,7 @@ export const CLOSE_REMINDER_LIST = "CLOSE_REMINDER_LIST";
 export const SET_ANCHOR_EL = "SET_ANCHOR_EL";
 
 export const ADD_REMINDER = "ADD_REMINDER";
+export const EDIT_REMINDER = "EDIT_REMINDER";
+export const DELETE_REMINDER = "DELETE_REMINDER";
+
 

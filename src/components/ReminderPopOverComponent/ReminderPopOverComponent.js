@@ -65,7 +65,6 @@ class ReminderPopOverComponent extends React.Component {
           </Typography>
           <ReminderForm
             className={classes.typography}
-            className={classes.typography}
             selectedDate={selectedDate}
             closePopOver={closePopOver}
             addReminder={addReminder}
