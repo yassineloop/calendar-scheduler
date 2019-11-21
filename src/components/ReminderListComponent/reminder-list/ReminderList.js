@@ -5,6 +5,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpansionReminder from "./ExpansionReminder";
+import {orderRemindersFromDateAsc} from "../../../utils/date-functions";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,6 +25,12 @@ const useStyles = makeStyles(theme => ({
 const ReminderList = (props) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+
+
+  React.useEffect(() => {
+    orderRemindersFromDateAsc(props.reminders);
+    console.log(props.reminders);
+  });
 
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);

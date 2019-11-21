@@ -2,12 +2,11 @@ import * as dateFns from 'date-fns';
 import {LongTimeFormat} from "./date-formats";
 import _ from 'lodash';
 
+
 export function getPrettyTime(date) {
   let formattedTime = dateFns.format(date, LongTimeFormat);
   return formattedTime;
 }
-
-
 
 export function getRightTimeDate(selectedDate, time) {
   let day = selectedDate.getDate();
@@ -20,7 +19,6 @@ export function getRightTimeDate(selectedDate, time) {
   let date = new Date(year, month, day, h, m);
 
   return date;
-
 }
 
 
@@ -29,3 +27,20 @@ export function getRemindersOfDate(reminders, selectedDate) {
   let filteredReminders = _.filter(reminders, {selectedDate: selectedDate});
   return filteredReminders;
 }
+
+
+export function orderRemindersFromDateAsc(reminders) {
+  let sorted = reminders.sort((a, b) => dateFns.compareAsc(a.reminderDate, b.reminderDate));
+  console.log(sorted);
+  return sorted;
+}
+
+export function orderRemindersFromDateDesc(reminders) {
+  let sorted = reminders.sort((a, b) => dateFns.compareDesc(a.reminderDate, b.reminderDate));
+  console.log(sorted);
+  return sorted;
+}
+
+
+
+

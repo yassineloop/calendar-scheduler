@@ -16,7 +16,7 @@ import {addReminderAction, deleteReminderAction, editReminderAction} from "../..
 import PropTypes from "prop-types";
 import connect from "react-redux/es/connect/connect";
 import ReminderList from "./reminder-list/ReminderList";
-import {getRemindersOfDate} from "../../utils/date-functions";
+import {getRemindersOfDate, orderRemindersFromDateAsc} from "../../utils/date-functions";
 
 const styles =  ({
   typography: {
@@ -77,7 +77,7 @@ class ReminderListComponent extends Component {
           </Typography>
 
           <ReminderList
-            reminders={getRemindersOfDate(reminders, selectedDate)}
+            reminders={orderRemindersFromDateAsc(getRemindersOfDate(reminders, selectedDate))}
             editReminder={editReminder}
             deleteReminder={deleteReminder}
             closeReminderList={closeReminderList}
