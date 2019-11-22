@@ -11,11 +11,35 @@ Here's the features:
 * Ability to edit reminders – including changing text and time from selected day
 * Ability to delete reminders
 
-#####Improvements
+#####Calendar view
+![Calendar](./images/calendar.png)
+
+#####Adding reminders
+![AddReminder](./images/addRem.png)
+
+#####Days with at least one reminder will have a bell showed on it
+![Calendar](./images/cellBell.png)
+
+#####Click on the bell to get the list of reminders
+![Calendar](./images/remList.png)
+
+#####Click on a reminder: it will expand to be edited or deleted
+![Calendar](./images/expansion.png)
+
+
+**Improvements**
+<br/>
 Integrate with redux-persist to still have the reminders on every refresh
 
+###Libraries used
+* date-fns https://date-fns.org/
+* lodash https://lodash.com/
+* react
+* redux
 
+###Components libraries
 
+* Material-UI https://material-ui.com/
 
 ## To start the app
 
