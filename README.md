@@ -11,19 +11,19 @@ Here's the features:
 * Ability to edit reminders – including changing text and time from selected day
 * Ability to delete reminders
 
-####Calendar view
+###Calendar view
 ![Calendar](./images/calendar.png)
 
-####Adding reminders
+###Adding reminders
 ![AddReminder](./images/addRem.png)
 
-####Days with at least one reminder will have a bell showed on it
+###Days with at least one reminder will have a bell showed on it
 ![Calendar](./images/cellBell.png)
 
-####Click on the bell to get the list of reminders
+###Click on the bell to get the list of reminders
 ![Calendar](./images/remList.png)
 
-####Click on a reminder: it will expand to be edited or deleted
+###Click on a reminder: it will expand to be edited or deleted
 ![Calendar](./images/expansion.png)
 
 
