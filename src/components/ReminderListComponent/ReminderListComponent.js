@@ -11,12 +11,12 @@ import {
   selectDateAction
 } from "../../redux/actions/calendarActions";
 
-import {addReminderAction, deleteReminderAction, editReminderAction} from "../../redux/actions/reminderActions";
+import { addReminderAction, deleteReminderAction, editReminderAction } from "../../redux/actions/reminderActions";
 
 import PropTypes from "prop-types";
 import connect from "react-redux/es/connect/connect";
 import ReminderList from "./reminder-list/ReminderList";
-import {getRemindersOfDate, orderRemindersFromDateAsc} from "../../utils/date-functions";
+import { getRemindersOfDate, orderRemindersFromDateAsc } from "../../utils/date-functions";
 
 const styles =  ({
   typography: {
@@ -49,7 +49,6 @@ class ReminderListComponent extends Component {
       editReminder,
       deleteReminder,
       closeReminderList
-
     } = this.props;
 
     const id = openedReminderList ? 'simple-popover' : undefined;

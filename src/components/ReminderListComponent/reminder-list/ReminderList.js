@@ -29,7 +29,6 @@ const ReminderList = (props) => {
 
   React.useEffect(() => {
     orderRemindersFromDateAsc(props.reminders);
-    console.log(props.reminders);
   });
 
   const handleChange = panel => (event, isExpanded) => {

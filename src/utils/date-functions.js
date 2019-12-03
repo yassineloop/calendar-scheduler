@@ -31,13 +31,11 @@ export function getRemindersOfDate(reminders, selectedDate) {
 
 export function orderRemindersFromDateAsc(reminders) {
   let sorted = reminders.sort((a, b) => dateFns.compareAsc(a.reminderDate, b.reminderDate));
-  console.log(sorted);
   return sorted;
 }
 
 export function orderRemindersFromDateDesc(reminders) {
   let sorted = reminders.sort((a, b) => dateFns.compareDesc(a.reminderDate, b.reminderDate));
-  console.log(sorted);
   return sorted;
 }
 
